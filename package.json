@@ -1,0 +1,22 @@
+{
+  "name": "pure-cjs",
+  "version": "0.0.0",
+  "description": "pure-cjs\r ========",
+  "main": "index.js",
+  "scripts": {
+    "test": "node . -i sample/a.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/RReverser/pure-cjs.git"
+  },
+  "author": "Ingvar Stepanyan <me@rreverser.com> (http://rreverser.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RReverser/pure-cjs/issues"
+  },
+  "dependencies": {
+    "commander": "~2.1.0",
+    "recast": "~0.4.25"
+  }
+}

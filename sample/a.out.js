@@ -1,0 +1,1 @@
+module.exports = require('./sub/b.js') * 2;
