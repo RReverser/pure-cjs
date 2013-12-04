@@ -1,5 +1,5 @@
 function require(index) {
-	var moduleObj = {exports: {}},
+	var moduleObj = {id: index, exports: {}},
 		moduleFunc = require.modules[index];
 
 	require.modules[index] = function () { return moduleObj.exports };
