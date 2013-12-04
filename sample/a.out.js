@@ -1,1 +1,3 @@
-module.exports = require('./sub/b.js') * 2;
+var $MODULES = [function() {
+        module.exports = $MODULES[1]() * 2;
+    }];
