@@ -28,7 +28,8 @@ var Replacer = Visitor.extend({
 		this.ids = parent ? parent.ids : {};
 		this.modulesArray = parent ? parent.modulesArray : [];
 		this.hasParent = !!parent;
-		this.path = url.resolve(parent ? parent.modulePath : '', modulePath).replace(jsExtRegExp, '.js');
+		this.path = '';
+		this.path = this.toAbsolute(modulePath);
 	},
 
 	getId: function (name) {
@@ -36,15 +37,19 @@ var Replacer = Visitor.extend({
 	},
 
 	toAbsolute: function (modulePath) {
-		return url.resolve(this.path, modulePath);
+		return url.resolve(this.path, modulePath).replace(jsExtRegExp, '.js');
 	},
 
 	visitCallExpression: function (node) {
 		if (n.Identifier.check(node.callee) && node.callee.name === 'require' && n.Literal.check(node.arguments[0])) {
+			var path = this.toAbsolute(node.arguments[0].value);
+
+			new Replacer(path, this).visit(recast.parse(fs.readFileSync(path, {encoding: 'utf-8'})));
+
 			return b.callExpression(
 				b.memberExpression(
 					this.modulesId,
-					b.literal(this.getId(node.arguments[0])),
+					b.literal(this.getId(path)),
 					true
 				),
 				node.arguments.slice(1)
@@ -74,8 +79,7 @@ console.log(program.input);
 var ast = recast.parse(fs.readFileSync(program.input, {encoding: 'utf-8'}));
 
 console.log(' => ');
-var replacer = new Replacer(program.input);
-replacer.visit(ast);
+new Replacer(program.input).visit(ast);
 
 fs.writeFileSync(program.output, recast.print(ast));
 console.log(program.output);
