@@ -1,12 +1,9 @@
-function require(index) {
+function require(index, exports) {
 	if (index in require.cache) {
 		return require.cache[index]();
 	}
 
-	var module = {
-		id: index,
-		exports: {}
-	};
+	var module = {id: index, exports: exports || {}};
 
 	require.cache[index] = function () {
 		return module.exports;
@@ -19,11 +16,11 @@ function require(index) {
 require.cache = [];
 
 require.modules = [function(module, exports) {
-    module.exports = require(1) * 2;
+    module.exports.topValue = require(1) * 2;
 }, function(module, exports) {
     module.exports = require(2).value * 7;
 }, function(module, exports) {
     exports.value = 3;
 }];
 
-require(0);
+require(0, window);

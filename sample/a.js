@@ -1,1 +1,1 @@
-module.exports = require('./sub/b.js') * 2;
+module.exports.topValue = require('./sub/b.js') * 2;

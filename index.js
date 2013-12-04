@@ -11,6 +11,7 @@ program
 	.version(require('./package.json').version)
 	.option('-i, --input <file>', 'Input file (required)')
 	.option('-o, --output <file>', 'Output file (defaults to <input>.out.js)')
+	.option('-e, --exports <id>', 'Exports object for top module')
 	.parse(process.argv);
 
 if (!program.input) {
@@ -64,7 +65,10 @@ var moduleArgs = [b.identifier('module'), b.identifier('exports')],
 							b.memberExpression(b.identifier('require'), b.identifier('modules'), false),
 							b.arrayExpression(this.modulesArray)
 						)),
-						b.expressionStatement(b.callExpression(b.identifier('require'), [b.literal(id)]))
+						b.expressionStatement(b.callExpression(
+							b.identifier('require'),
+							[b.literal(id)].concat(program.exports ? [recast.parse(program.exports).program.body[0].expression] : [])
+						))
 					])
 				);
 			}

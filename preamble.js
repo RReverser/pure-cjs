@@ -1,12 +1,9 @@
-function require(index) {
+function require(index, exports) {
 	if (index in require.cache) {
 		return require.cache[index]();
 	}
 
-	var module = {
-		id: index,
-		exports: {}
-	};
+	var module = {id: index, exports: exports || {}};
 
 	require.cache[index] = function () {
 		return module.exports;
