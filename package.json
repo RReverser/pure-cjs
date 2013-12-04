@@ -4,7 +4,7 @@
   "description": "pure-cjs\r ========",
   "main": "index.js",
   "scripts": {
-    "test": "node . -i sample/a.js -e window"
+    "test": "node . -i sample/a.js -e window.A"
   },
   "repository": {
     "type": "git",
