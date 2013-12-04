@@ -21,27 +21,14 @@ if (!program.output) {
 	program.output = program.input.replace(jsExtRegExp, '.out.js');
 }
 
-var modulesId = b.identifier('$MODULES'),
-	moduleId = b.identifier('module'),
-	exportsId = b.identifier('exports'),
-	moduleExportsMember = b.memberExpression(moduleId, exportsId, false),
-	modulePreamble = b.variableDeclaration('var', [
-		b.variableDeclarator(exportsId, b.objectExpression([])),
-		b.variableDeclarator(moduleId, b.objectExpression([
-			b.property('init', exportsId, exportsId)
-		]))
-	]),
-	moduleReturn = b.returnStatement(moduleExportsMember),
-	moduleExportsFunc = b.functionExpression(null, [], b.blockStatement([
-		b.returnStatement(moduleExportsMember)
-	])),
-
+var moduleArgs = [b.identifier('module'), b.identifier('exports')],
 	Replacer = Visitor.extend({
+		path: '',
+
 		init: function (modulePath, parent) {
 			this.ids = parent ? parent.ids : {};
 			this.modulesArray = parent ? parent.modulesArray : [];
 			this.hasParent = !!parent;
-			this.path = '';
 			this.path = this.toAbsolute(modulePath);
 		},
 
@@ -56,17 +43,8 @@ var modulesId = b.identifier('$MODULES'),
 		visitCallExpression: function (node) {
 			if (n.Identifier.check(node.callee) && node.callee.name === 'require' && n.Literal.check(node.arguments[0])) {
 				var path = this.toAbsolute(node.arguments[0].value);
-
+				node.arguments[0] = b.literal(this.getId(path));
 				new Replacer(path, this).visit(recast.parse(fs.readFileSync(path, {encoding: 'utf-8'})));
-
-				return b.callExpression(
-					b.memberExpression(
-						modulesId,
-						b.literal(this.getId(path)),
-						true
-					),
-					node.arguments.slice(1)
-				);
 			}
 
 			this.genericVisit(node);
@@ -75,25 +53,20 @@ var modulesId = b.identifier('$MODULES'),
 		visitProgram: function (node) {
 			var id = this.getId(this.path);
 
-			node.body.unshift(modulePreamble, b.expressionStatement(b.assignmentExpression(
-				'=',
-				b.memberExpression(modulesId, b.literal(id), true),
-				moduleExportsFunc
-			)));
-
-			node.body.push(moduleReturn);
-
-			this.modulesArray[id] = b.functionExpression(null, [], b.blockStatement(node.body));
+			this.modulesArray[id] = b.functionExpression(null, moduleArgs, b.blockStatement(node.body));
 			this.visit(node.body);
 
 			if (!this.hasParent) {
-				return b.program([
-					b.variableDeclaration('var', [b.variableDeclarator(
-						modulesId,
-						b.arrayExpression(this.modulesArray)
-					)]),
-					b.expressionStatement(b.callExpression(b.memberExpression(modulesId, b.literal(0), true), []))
-				]);
+				return b.program(
+					recast.parse(fs.readFileSync('preamble.js')).program.body.concat([
+						b.expressionStatement(b.assignmentExpression(
+							'=',
+							b.memberExpression(b.identifier('require'), b.identifier('modules'), false),
+							b.arrayExpression(this.modulesArray)
+						)),
+						b.expressionStatement(b.callExpression(b.identifier('require'), [b.literal(id)]))
+					])
+				);
 			}
 		}
 	});
