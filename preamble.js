@@ -1,16 +1,16 @@
-function require(index) {
-	if (index in require.cache) {
-		return require.cache[index]();
+function _require(index) {
+	if (index in _require.cache) {
+		return _require.cache[index]();
 	}
 
 	var module = {id: index, exports: {}};
 
-	require.cache[index] = function () {
+	_require.cache[index] = function () {
 		return module.exports;
 	};
 
-	require.modules[index](module, module.exports);
+	_require.modules[index](module, module.exports);
 	return module.exports;
 }
 
-require.cache = [];
+_require.cache = [];

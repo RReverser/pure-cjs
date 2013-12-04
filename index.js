@@ -5,7 +5,8 @@ var fs = require('fs'),
 	n = recast.namedTypes,
 	program = require('commander'),
 	url = require('url'),
-	jsExtRegExp = /(\.js)?$/;
+	jsExtRegExp = /(\.js)?$/,
+	localRegEx = /^\.\.?\//;
 
 program
 	.version(require('./package.json').version)
@@ -23,6 +24,7 @@ if (!program.output) {
 }
 
 var moduleArgs = [b.identifier('module'), b.identifier('exports')],
+	_requireId = b.identifier('_require'),
 	Replacer = Visitor.extend({
 		path: '',
 
@@ -42,10 +44,10 @@ var moduleArgs = [b.identifier('module'), b.identifier('exports')],
 		},
 
 		visitCallExpression: function (node) {
-			if (n.Identifier.check(node.callee) && node.callee.name === 'require' && n.Literal.check(node.arguments[0])) {
+			if (n.Identifier.check(node.callee) && node.callee.name === 'require' && n.Literal.check(node.arguments[0]) && localRegEx.test(node.arguments[0].value)) {
 				var path = this.toAbsolute(node.arguments[0].value);
-				node.arguments[0] = b.literal(this.getId(path));
 				new Replacer(path, this).visit(recast.parse(fs.readFileSync(path, {encoding: 'utf-8'})));
+				return b.callExpression(_requireId, [b.literal(this.getId(path))]);
 			}
 
 			this.genericVisit(node);
@@ -59,7 +61,7 @@ var moduleArgs = [b.identifier('module'), b.identifier('exports')],
 
 			if (!this.hasParent) {
 				var requireExpr = b.callExpression(
-					b.identifier('require'),
+					_requireId,
 					[b.literal(id)]
 				);
 
@@ -75,7 +77,7 @@ var moduleArgs = [b.identifier('module'), b.identifier('exports')],
 					recast.parse(fs.readFileSync('preamble.js')).program.body.concat([
 						b.expressionStatement(b.assignmentExpression(
 							'=',
-							b.memberExpression(b.identifier('require'), b.identifier('modules'), false),
+							b.memberExpression(_requireId, b.identifier('modules'), false),
 							b.arrayExpression(this.modulesArray)
 						)),
 						b.expressionStatement(requireExpr)

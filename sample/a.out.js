@@ -1,26 +1,27 @@
-function require(index) {
-	if (index in require.cache) {
-		return require.cache[index]();
+function _require(index) {
+	if (index in _require.cache) {
+		return _require.cache[index]();
 	}
 
 	var module = {id: index, exports: {}};
 
-	require.cache[index] = function () {
+	_require.cache[index] = function () {
 		return module.exports;
 	};
 
-	require.modules[index](module, module.exports);
+	_require.modules[index](module, module.exports);
 	return module.exports;
 }
 
-require.cache = [];
+_require.cache = [];
 
-require.modules = [function(module, exports) {
-    module.exports.topValue = require(1) * 2;
+_require.modules = [function(module, exports) {
+    var url = require('url');
+    module.exports.topValue = _require(1) * 2;
 }, function(module, exports) {
-    module.exports = require(2).value * 7;
+    module.exports = _require(2).value * 7;
 }, function(module, exports) {
     exports.value = 3;
 }];
 
-window.A = require(0);
+window.A = _require(0);
