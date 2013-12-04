@@ -32,6 +32,9 @@ var modulesId = b.identifier('$MODULES'),
 		]))
 	]),
 	moduleReturn = b.returnStatement(moduleExportsMember),
+	moduleExportsFunc = b.functionExpression(null, [], b.blockStatement([
+		b.returnStatement(moduleExportsMember)
+	])),
 
 	Replacer = Visitor.extend({
 		init: function (modulePath, parent) {
@@ -70,10 +73,17 @@ var modulesId = b.identifier('$MODULES'),
 		},
 
 		visitProgram: function (node) {
-			node.body.unshift(modulePreamble);
+			var id = this.getId(this.path);
+
+			node.body.unshift(modulePreamble, b.expressionStatement(b.assignmentExpression(
+				'=',
+				b.memberExpression(modulesId, b.literal(id), true),
+				moduleExportsFunc
+			)));
+
 			node.body.push(moduleReturn);
 
-			this.modulesArray[this.getId(this.path)] = b.functionExpression(null, [], b.blockStatement(node.body));
+			this.modulesArray[id] = b.functionExpression(null, [], b.blockStatement(node.body));
 			this.visit(node.body);
 
 			if (!this.hasParent) {
