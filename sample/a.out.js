@@ -1,13 +1,22 @@
 function require(index) {
-	var moduleObj = {exports: {}},
-		moduleFunc = require.modules[index];
+	if (index in require.cache) {
+		return require.cache[index]();
+	}
 
-	require.modules[index] = function () { return moduleObj.exports };
+	var module = {
+		id: index,
+		exports: {}
+	};
 
-	moduleFunc(moduleObj, moduleObj.exports);
-	
+	require.cache[index] = function () {
+		return module.exports;
+	};
+
+	require.modules[index](module, module.exports);
 	return module.exports;
 }
+
+require.cache = [];
 
 require.modules = [function(module, exports) {
     module.exports = require(1) * 2;
