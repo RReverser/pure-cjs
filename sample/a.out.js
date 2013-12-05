@@ -19,6 +19,7 @@ window.A = function() {
 
         module.exports.topValue = _require(2) * 2;
     }, function(module, exports) {
+        var a = _require(0);
         exports.value = 3;
     }, function(module, exports) {
         module.exports = _require(1).value * 7;
