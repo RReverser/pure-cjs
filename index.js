@@ -59,31 +59,43 @@ var moduleArgs = [b.identifier('module'), b.identifier('exports')],
 			this.modulesArray[id] = b.functionExpression(null, moduleArgs, b.blockStatement(node.body));
 			this.visit(node.body);
 
-			if (!this.hasParent) {
-				var requireExpr = b.callExpression(
-					_requireId,
-					[b.literal(id)]
-				);
+			if (this.hasParent) {
+				return;
+			}
 
-				if (program.exports) {
-					requireExpr = b.assignmentExpression(
+			var requireExpr = b.callExpression(
+				_requireId,
+				[b.literal(id)]
+			);
+
+			node = recast.parse(fs.readFileSync('preamble.js')).program;
+
+			node.body.push(
+				b.expressionStatement(b.assignmentExpression(
+					'=',
+					b.memberExpression(_requireId, b.identifier('modules'), false),
+					b.arrayExpression(this.modulesArray)
+				))
+			);
+
+			if (program.exports) {
+				node.body.push(b.returnStatement(requireExpr));
+
+				node.body = [b.expressionStatement(
+					b.assignmentExpression(
 						'=',
 						recast.parse(program.exports).program.body[0].expression,
-						requireExpr
-					);
-				}
-
-				return b.program(
-					recast.parse(fs.readFileSync('preamble.js')).program.body.concat([
-						b.expressionStatement(b.assignmentExpression(
-							'=',
-							b.memberExpression(_requireId, b.identifier('modules'), false),
-							b.arrayExpression(this.modulesArray)
-						)),
-						b.expressionStatement(requireExpr)
-					])
-				);
+						b.callExpression(
+							b.functionExpression(null, [], b.blockStatement(node.body)),
+							[]
+						)
+					)
+				)];
+			} else {
+				node.body.push(b.expressionStatement(requireExpr));
 			}
+
+			return node;
 		}
 	});
 
