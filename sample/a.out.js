@@ -14,12 +14,14 @@ window.A = function() {
     _require.cache = [];
 
     _require.modules = [function(module, exports) {
-        var url = require('url');
-        module.exports.topValue = _require(1) * 2;
-    }, function(module, exports) {
-        module.exports = _require(2).value * 7;
+        var url = require('url'),
+            c = _require(1);
+
+        module.exports.topValue = _require(2) * 2;
     }, function(module, exports) {
         exports.value = 3;
+    }, function(module, exports) {
+        module.exports = _require(1).value * 7;
     }];
 
     return _require(0);

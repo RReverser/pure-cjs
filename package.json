@@ -1,6 +1,6 @@
 {
   "name": "pure-cjs",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Pure minimalistic CommonJS builder",
   "bin": "./bin/pure-cjs",
   "main": "./lib/pure-cjs",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "commander": "~2.1.0",
-    "recast": "~0.4.25"
+    "recast": "~0.4.25",
+    "davy": "0.0.7"
   }
 }
