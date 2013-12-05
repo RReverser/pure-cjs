@@ -4,7 +4,7 @@ var program = require('commander'),
 	cjs = require(__dirname + '/../lib/pure-cjs');
 
 program
-	.version(require('./package.json').version)
+	.version(require(__dirname + '/../package.json').version)
 	.option('-i, --input <file>', 'Input file (required)')
 	.option('-o, --output <file>', 'Output file (defaults to <input>.out.js)')
 	.option('-e, --exports <id>', 'Exports destination')
