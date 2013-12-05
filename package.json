@@ -1,12 +1,12 @@
 {
   "name": "pure-cjs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Pure minimalistic CommonJS builder",
   "bin": "./bin/pure-cjs",
   "main": "./lib/pure-cjs",
   "preferGlobal": true,
   "scripts": {
-    "test": "node ./bin/pure-cjs-cli -i sample/a.js -e window.A"
+    "test": "node ./bin/pure-cjs -i sample/a.js -e window.A"
   },
   "repository": {
     "type": "git",

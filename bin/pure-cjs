@@ -15,5 +15,7 @@ if (!program.input) {
 }
 
 console.log('Building...');
+
 cjs.transform(program);
-console.log('Done');
+
+console.log('Built to:', program.output);
