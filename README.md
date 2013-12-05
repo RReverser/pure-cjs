@@ -3,7 +3,14 @@ pure-cjs
 
 Pure CommonJS Modules builder.
 
-Features:
+Installation
+------------
+```bash
+npm install -g pure-cjs
+```
+
+Features
+--------
 
 * Minimal destination overhead (almost as small as concatenated file).
 * Ability to export `module.exports` from top module as single property / identifier (useful for building libs).

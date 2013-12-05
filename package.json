@@ -1,8 +1,9 @@
 {
   "name": "pure-cjs",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "pure-cjs\r ========",
-  "main": "index.js",
+  "bin": "./index.js",
+  "preferGlobal": true,
   "scripts": {
     "test": "node . -i sample/a.js -e window.A"
   },
