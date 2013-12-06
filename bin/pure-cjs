@@ -5,9 +5,9 @@ var program = require('commander'),
 
 program
 	.version(require(__dirname + '/../package.json').version)
-	.option('-i, --input <file>', 'Input file (required)')
-	.option('-o, --output <file>', 'Output file (defaults to <input>.out.js)')
-	.option('-e, --exports <id>', 'Exports destination')
+	.option('-i, --input <file>', 'input file (required)')
+	.option('-o, --output <file>', 'output file (defaults to <input>.out.js)')
+	.option('-e, --exports <id>', 'top module exports destination (optional)')
 	.parse(process.argv);
 
 if (!program.input) {

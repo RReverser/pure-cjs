@@ -3,10 +3,23 @@ pure-cjs
 
 Pure CommonJS Modules builder.
 
-Installation
+Installation and usage
 ------------
-```bash
+
+```
 npm install -g pure-cjs
+```
+
+```
+Usage: pure-cjs [options]
+
+Options:
+
+  -h, --help           output usage information
+  -V, --version        output the version number
+  -i, --input <file>   input file (required)
+  -o, --output <file>  output file (defaults to <input>.out.js)
+  -e, --exports <id>   top module exports destination (optional)
 ```
 
 Features
