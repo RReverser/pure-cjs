@@ -1,14 +1,14 @@
 window.A = function() {
     function _require(index) {
-        var cache = _require.cache;
+        var module = _require.cache[index];
         
-        if (index in cache) {
-            return cache[index].exports;
-        } else {
-            var module = cache[index] = {id: index, exports: {}};
-            _require.modules[index](module, module.exports);
-            return module.exports;
+        if (!module) {
+            var exports = {};
+            module = _require.cache[index] = {id: index, exports: exports};
+            _require.modules[index].call(exports, module, exports);
         }
+    
+        return module.exports;
     }
 
     _require.cache = [];
@@ -17,7 +17,7 @@ window.A = function() {
         var url = require('url'),
             c = _require(1);
 
-        module.exports.topValue = _require(2) * 2;
+        this.topValue = _require(2) * 2;
     }, function(module, exports) {
         var a = _require(0);
         exports.value = 3;
