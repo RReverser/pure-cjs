@@ -9,6 +9,7 @@ Features
 * Minimal destination overhead (almost as small as concatenated file).
 * Ability to export `module.exports` from top module as single property / identifier (useful for building libs).
 * Resolves all the paths on build stage to static number identifiers (so saves space and execution time used for storing and resolving string paths, but should be used only for projects with static `require('./some/module')` calls and would fail on others (same restriction applicable for [r.js (Simplified CommonJS wrapper)](http://requirejs.org/docs/whyamd.html#sugar) and most projects already match this).
+* Supports modules installed as `npm` dependencies in `node_modules` hierarchy.
 * Does not corrupt `require('systemModule')` calls, transforms only local ones.
 
 Console usage
@@ -23,6 +24,7 @@ Command-line options:
 -V, --version        output the version number
 -i, --input <file>   input file (required)
 -o, --output <file>  output file (defaults to <input>.out.js)
+-m, --map <file>     file to store source map to (optional, defaults to <output>.map)
 -e, --exports <id>   top module exports destination (optional)
 ```
 
@@ -35,6 +37,7 @@ var cjs = require('pure-cjs');
 cjs.transform({
 	input: 'superLib/topModule.js' /* String|Function(): input file */,
 	output: function (input) { return input.replace(/(\.js)?$/, '.out.js') } /* [?] String|Function(input): output file */,
+	map: function (input, output) { return output + '.map' } /* [?] String|Function(input, output): source map file */,
 	exports: 'window.SuperLib' /* [?] String|Function(input, output): Object to wrap and put exports from top module into */
 });
 ```
