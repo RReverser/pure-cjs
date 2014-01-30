@@ -39,9 +39,12 @@ cjs.transform({
 	output: function (input) { return input.replace(/(\.js)?$/, '.out.js') } /* [?] String|Function(input): output file */,
 	map: function (input, output) { return output + '.map' } /* [?] String|Function(input, output): source map file */,
 	exports: 'window.SuperLib' /* [?] String|Function(input, output): Object to wrap and put exports from top module into */,
-	transform: [] /* [?] Array|Function(input): Array of or single function that returns transformation [through](https://github.com/dominictarr/through)-stream to be used against input files.
+	transform: [] /* [?] Array|Function(input): Array of or single function that returns
+	transformation [through](https://github.com/dominictarr/through)-stream to be used against input files. */,
+	dryRun: false /* Boolean: if set, doesn't write output to disk
 }).then(function (options) {
-	// handle successful result with calculated paths
+	// handle successful result with calculated options
+	// object containing new `output = {code, map}` property
 }, function (err) {
 	// handle error
 });
