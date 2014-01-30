@@ -1,10 +1,8 @@
-pure-cjs
-========
+# pure-cjs
 
 Pure CommonJS Modules builder.
 
-Features
---------
+## Features
 
 * Minimal destination overhead (almost as small as concatenated file).
 * Ability to export `module.exports` from top module as single property / identifier (useful for building libs).
@@ -12,8 +10,7 @@ Features
 * Supports modules installed as `npm` dependencies in `node_modules` hierarchy.
 * Does not corrupt `require('systemModule')` calls, transforms only local ones.
 
-Console usage
--------------
+## Console usage
 
 Installation:
 `npm install -g pure-cjs`
@@ -28,29 +25,33 @@ Command-line options:
 -e, --exports <id>   top module exports destination (optional)
 ```
 
-Usage from Node.js
-------------------
+## Usage from Node.js
 
 ```javascript
 var cjs = require('pure-cjs');
 
-cjs.transform({
-	input: 'superLib/topModule.js' /* String|Function(): input file */,
-	output: function (input) { return input.replace(/(\.js)?$/, '.out.js') } /* [?] String|Function(input): output file */,
-	map: function (input, output) { return output + '.map' } /* [?] String|Function(input, output): source map file */,
-	exports: 'window.SuperLib' /* [?] String|Function(input, output): Object to wrap and put exports from top module into */,
-	transform: [] /* [?] Array|Function(input): Array of or single function that returns
-	transformation [through](https://github.com/dominictarr/through)-stream to be used against input files. */,
-	dryRun: false /* Boolean: if set, doesn't write output to disk
-}).then(function (options) {
-	// handle successful result with calculated options
-	// object containing new `output = {code, map}` property
+cjs.transform(options).then(function (result) {
+    // handle successful result
 }, function (err) {
 	// handle error
 });
 ```
 
-Usage from Grunt
-----------------
+### Options object
+
+* **input**: `String|Function()` &mdash; input file; example: `'superLib/topModule.js'`.
+* **output**: `String|Function(input)` &mdash; output file; optional, defaults to: `function (input) { return input.replace(/(\.js)?$/, '.out.js') }`.
+* **map**: `String|Function(input, output)|Boolean` &mdash; source map file; optional, doesn't generate source map by default; if `true` is provided, path default to `function (input, output) { return output + '.map' }`.
+* **exports**: `String|Function(input, output)` &mdash; Exports top module with [UMD](https://github.com/umdjs/umd) with given global object name; optional, doesn't wrap into UMD by default.
+* **transform**: `Array|Function(input)` &mdash; Array of or single function that returns transformation [through](https://github.com/dominictarr/through)-stream(s) to be used against input files before their usage; optional.
+* **dryRun**: `Boolean` &mdash; if set to `true`, doesn't write output to disk.
+
+### Result object
+
+* **code**: `String` &mdash; generated source code.
+* **map**: `Object` &mdash; source map object.
+* **options**: `Object` &mdash; options object with resolved defaults and paths.
+
+## Usage from Grunt
 
 Check out [grunt-pure-cjs](https://github.com/RReverser/grunt-pure-cjs) to use builder as [Grunt](https://gruntjs.com/) plugin.

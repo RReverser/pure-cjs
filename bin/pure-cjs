@@ -17,8 +17,8 @@ if (!program.input) {
 
 console.log('Building...');
 
-cjs.transform(program).then(function (options) {
-	console.log('Built to:', options.output);
+cjs.transform(program).then(function (result) {
+	console.log('Built to:', result.options.output);
 }, function (error) {
 	console.error(error.stack);
 });
