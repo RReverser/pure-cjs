@@ -27,9 +27,10 @@
     _require.cache = [];
 
     _require.modules = [function(module, exports) {
-        var c = _require(1);
+        var c = _require(1),
+            url = require('url');
+
         this.topValue = _require(2) * 2;
-        exports.Promise = davy;
     }, function(module, exports) {
         var a = _require(0);
         exports.value = 3;
