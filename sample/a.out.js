@@ -11,7 +11,7 @@
         // Browser globals (root is window)
         this[name] = factory();
   }
-})("SuperLib", function() {
+})("SuperLib", function(define) {
     function _require(index) {
         var module = _require.cache[index];
         
