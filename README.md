@@ -9,7 +9,7 @@ Pure CommonJS Modules builder.
 * Ability to export `module.exports` from top module in [UMD](https://github.com/umdjs/umd) style (useful for building libs).
 * Allows to use [through](https://github.com/dominictarr/through)-stream(s) for pre-transformations.
 * Supports modules installed as `npm` dependencies in `node_modules` hierarchy.
-* Does not corrupt `require('systemModule')` calls, transforms only local ones, so they will work if you use UMD export (see above).
+* Does not corrupt `require('systemModule')` calls, transforms only local ones.
 
 ## Console usage
 
