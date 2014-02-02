@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var program = require('commander'),
-	cjs = require(__dirname + '/../lib/pure-cjs');
+	cjs = require(__dirname + '/../lib/pureCjs');
 
 program
 	.version(require(__dirname + '/../package.json').version)
