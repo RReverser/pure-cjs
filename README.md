@@ -10,6 +10,7 @@ Pure CommonJS Modules builder.
 * Allows to use [through](https://github.com/dominictarr/through)-stream(s) for pre-transformations.
 * Supports modules installed as `npm` dependencies in `node_modules` hierarchy.
 * Does not corrupt `require('systemModule')` calls, transforms only local ones.
+* Ability to exclude required UMD modules from the output. The excluded modules will be added as requirements to the UMD block.
 
 ## Console usage
 
@@ -46,6 +47,10 @@ cjs.transform(options).then(function (result) {
 * **exports**: `String|Function(input, output)` &mdash; Exports top module with [UMD](https://github.com/umdjs/umd) with given global object name; optional, doesn't wrap into UMD by default.
 * **transform**: `Array|Function(input)` &mdash; Array of or single function that returns transformation [through](https://github.com/dominictarr/through)-stream(s) to be used against input files before their usage; optional.
 * **dryRun**: `Boolean` &mdash; if set to `true`, doesn't write output to disk.
+* **link**: `Object` &mdash; Link module names. Currently only supports excluding modules from the build, but other kind of module links are planned for the future.
+    - **[moduleName]**:
+        + **source**: `String` &mdash; How to link the object. Currently only 'external' is supported.
+        + **name**: `String` &mdash; The module name to link to. If **source** is 'external' then this value points to the name of the global variable that the given UMD module exports in the absence of a module system like CommonJS or AMD.
 
 ### Result object
 
