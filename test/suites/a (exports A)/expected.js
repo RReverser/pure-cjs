@@ -11,7 +11,7 @@
         // Browser globals (root is window)
         this[name] = factory();
   }
-})("SuperLib", function(define) {
+})("A", function(define) {
     function _require(index) {
         var module = _require.cache[index];
         
@@ -40,4 +40,3 @@
 
     return _require(0);
 });
-//# sourceMappingURL=a.out.js.map
