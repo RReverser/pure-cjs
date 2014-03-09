@@ -1,6 +1,6 @@
 {
   "name": "pure-cjs",
-  "version": "1.8.6",
+  "version": "1.9.0",
   "description": "Pure minimalistic CommonJS builder",
   "bin": "./bin/pure-cjs",
   "main": "./lib/pureCjs",
@@ -20,8 +20,10 @@
     "commander": "~2.1.0",
     "resolve": "~0.6.1",
     "davy": "0.0.8",
-    "recast": "~0.5.7",
-    "event-stream": "~3.1.0"
+    "event-stream": "~3.1.0",
+    "escodegen": "~1.2.0",
+    "ast-types": "~0.3.18",
+    "esprima": "~1.0.4"
   },
   "devDependencies": {
     "nodeunit": "~0.8.6"

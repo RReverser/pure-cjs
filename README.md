@@ -45,7 +45,7 @@ cjs.transform(options).then(function (result) {
 * **map**: `String|Function(input, output)|Boolean` &mdash; source map file; optional, doesn't generate source map by default; if `true` is provided, path default to `function (input, output) { return output + '.map' }`.
 * **exports**: `String|Function(input, output)` &mdash; Exports top module with [UMD](https://github.com/umdjs/umd) with given global object name; optional, doesn't wrap into UMD by default.
 * **transform**: `Array|Function(input)` &mdash; Array of or single function that returns transformation [through](https://github.com/dominictarr/through)-stream(s) to be used against input files before their usage; optional.
-* **dryRun**: `Boolean` &mdash; if set to `true`, doesn't write output to disk.
+* **dryRun**: `Boolean` &mdash; if set to `true`, doesn't write output to disk and doesn't append `//# sourceMappingURL=...` to code so you can handle it differently on your own.
 
 ### Result object
 
