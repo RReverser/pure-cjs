@@ -1,46 +1,51 @@
 var fs = require('fs'),
+	assert = require('chai').assert,
 	cjs = require('..'),
 	Promise = require('../lib/promise'),
 	whenReadFile = Promise.wrap(fs.readFile),
-	suitesPath = 'suites/';
+	suitesPath = 'suites/',
+	badLineBreak = /\r\n/g;
+
+require('mocha-as-promised')();
+
+function assertEqualContents(content1, content2) {
+	assert.equal(String(content1).replace(badLineBreak, '\n'), String(content2).replace(badLineBreak, '\n'));
+}
 
 process.chdir(__dirname);
 
 fs.readdirSync(__dirname + '/' + suitesPath).forEach(function (suiteName) {
-	this[suiteName] = function (test) {
+	it(suiteName, function () {
 		var suitePath = suitesPath + suiteName + '/';
 
 		var options = require('./' + suitePath + 'options');
 		options.output = suitePath + 'expected.js';
 		options.dryRun = true;
 
-		console.time('Execution time');
-		
-		cjs.transform(options).then(function (output) {
-			console.timeEnd('Execution time');
-
+		return cjs.transform(options).then(function (output) {
 			var promises = [
 				whenReadFile(output.options.output, 'utf-8').then(function (contents) {
-					test.equal(output.code, contents.replace(/\s*\/\/#\s+sourceMappingURL=.*$/, ''));
+					assertEqualContents(
+						output.code,
+						contents.replace(/\s*\/\/#\s+sourceMappingURL=.*$/, '')
+					);
 				})
 			];
 
 			if (output.options.map) {
 				promises.push(
 					whenReadFile(output.options.map, 'utf-8').then(function (contents) {
-						test.equal(output.map.toString(), contents);
+						assertEqualContents(
+							output.map,
+							contents
+						);
 					})
 				);
 			} else {
-				test.ok(!output.map);
+				assert.notOk(output.map);
 			}
 
 			return Promise.all(promises);
-		}).then(function () {
-			test.done();
-		}, function (err) {
-			test.ifError(err);
-			test.done();
 		});
-	};
-}, exports);
+	});
+});

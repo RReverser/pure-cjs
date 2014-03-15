@@ -1,11 +1,11 @@
 {
   "name": "pure-cjs",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "Pure minimalistic CommonJS builder",
   "bin": "./bin/pure-cjs",
   "main": "./lib/pureCjs",
   "scripts": {
-    "test": "node ./node_modules/nodeunit/bin/nodeunit test/test.js"
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,8 @@
     "esprima": "~1.0.4"
   },
   "devDependencies": {
-    "nodeunit": "~0.8.6"
+    "mocha": "^1.18.0",
+    "mocha-as-promised": "^2.0.0",
+    "chai": "^1.9.0"
   }
 }
