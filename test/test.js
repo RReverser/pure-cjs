@@ -6,8 +6,6 @@ var fs = require('fs'),
 	suitesPath = 'suites/',
 	badLineBreak = /\r\n/g;
 
-require('mocha-as-promised')();
-
 function assertEqualContents(content1, content2) {
 	assert.equal(String(content1).replace(badLineBreak, '\n'), String(content2).replace(badLineBreak, '\n'));
 }

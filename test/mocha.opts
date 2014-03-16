@@ -1,3 +1,2 @@
---reporter spec
---slow 0
+--reporter list
 test/test.js
