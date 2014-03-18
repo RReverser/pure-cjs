@@ -14,16 +14,16 @@
     _require.cache = [];
     _require.modules = [
         function (module, exports) {
-            var a = _require(1);
-            exports.value = 3;
-        },
-        function (module, exports) {
-            var c = _require(0), url = require('url');
+            var c = _require(1), url = require('url');
             this.topValue = _require(2) * 2;
         },
         function (module, exports) {
-            module.exports = _require(0).value * 7;
+            var a = _require(0);
+            exports.value = 3;
+        },
+        function (module, exports) {
+            module.exports = _require(1).value * 7;
         }
     ];
-    _require(0);
+    _require(1);
 }());
