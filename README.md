@@ -2,6 +2,10 @@
 
 Pure CommonJS Modules builder.
 
+## Used by
+
+[React.js](https://github.com/facebook/react) ([pull request](https://github.com/facebook/react/pull/1234)).
+
 ## Features
 
 * Minimal destination overhead (almost as small as concatenated file).
