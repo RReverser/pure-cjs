@@ -1,3 +1,5 @@
+// License of a
+
 var c = require('./c'),
 	url = require('url');
 

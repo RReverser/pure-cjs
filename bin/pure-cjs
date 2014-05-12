@@ -8,6 +8,7 @@ program
 	.option('-i, --input <file>', 'input file (required)')
 	.option('-o, --output <file>', 'output file (defaults to <input>.out.js)')
 	.option('-m, --map [file]', 'file to store source map to (optional)')
+	.option('-c, --comments', 'preserve comments in output')
 	.option('-e, --exports <id>', 'top module exports destination (optional)')
 	.parse(process.argv);
 

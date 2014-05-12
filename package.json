@@ -1,32 +1,26 @@
 {
   "name": "pure-cjs",
-  "version": "1.9.2",
+  "version": "1.10.0",
   "description": "Pure minimalistic CommonJS builder",
   "bin": "./bin/pure-cjs",
   "main": "./lib/pureCjs",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha"
+    "test": "mocha"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/RReverser/pure-cjs.git"
-  },
-  "author": "Ingvar Stepanyan <me@rreverser.com> (http://rreverser.com/)",
+  "repository": "RReverser/pure-cjs",
+  "author": "Ingvar Stepanyan <me@rreverser.com> (http://github.com/RReverser)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/RReverser/pure-cjs/issues"
-  },
   "dependencies": {
-    "commander": "~2.1.0",
-    "resolve": "~0.6.1",
-    "davy": "0.0.8",
-    "event-stream": "~3.1.0",
-    "escodegen": "~1.2.0",
-    "ast-types": "~0.3.18",
-    "esprima": "~1.0.4"
+    "commander": "^2.2.0",
+    "resolve": "^0.6.3",
+    "davy": "0.3.0",
+    "event-stream": "^3.1.5",
+    "escodegen": "^1.3.2",
+    "ast-types": "^0.3.27",
+    "esprima": "^1.2.1"
   },
   "devDependencies": {
-    "mocha": "^1.18.0",
-    "chai": "^1.9.0"
+    "mocha": "^1.18.2",
+    "chai": "^1.9.1"
   }
 }
