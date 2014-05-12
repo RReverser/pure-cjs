@@ -45,13 +45,15 @@ cjs.transform(options).then(function (result) {
 
 ### Options object
 
-* **input**: `String|Function()` &mdash; input file; example: `'superLib/topModule.js'`.
-* **output**: `String|Function(input)` &mdash; output file; optional, defaults to: `function (input) { return input.replace(/(\.js)?$/, '.out.js') }`.
-* **map**: `String|Function(input, output)|Boolean` &mdash; source map file; optional, doesn't generate source map by default; if `true` is provided, path default to `function (input, output) { return output + '.map' }`.
-* **comments**: `Boolean` &mdash; preserve comments in output (`false` by default).
-* **exports**: `String|Function(input, output)` &mdash; Exports top module with [UMD](https://github.com/umdjs/umd) with given global object name; optional, doesn't wrap into UMD by default.
-* **transform**: `Array|Function(input)` &mdash; Array of or single function that returns transformation [through](https://github.com/dominictarr/through)-stream(s) to be used against input files before their usage; optional.
-* **dryRun**: `Boolean` &mdash; if set to `true`, doesn't write output to disk and doesn't append `//# sourceMappingURL=...` to code so you can handle it differently on your own.
+Name | Type | Description | Default
+---- | ---- | ----------- | -------
+input | `String` / `Function()` | Input file; example: `'superLib/topModule.js'` | **(required)**
+output | `String` / `Function(input)` | Output file | `input => input.replace(/(\.js)?$/, '.out.js')`
+map | `String` / `Function(input,output)` / `Boolean` | Source map | if true: `(input, output) => output + '.map'`.
+comments | `Boolean` | Preserve comments in output | `false`
+exports | `String` / `Function(input,output)` | Export top module with [UMD](https://github.com/umdjs/umd) with given global object name | `false`
+transform | `Array` / `Function(input)` | Transformation [through](https://github.com/dominictarr/through)-stream(s) to be used against input files | `[]`
+dryRun | `Boolean` | Don't write output to disk (and don't append `//# sourceMappingURL=...` to code) | `false`
 
 ### Result object
 
