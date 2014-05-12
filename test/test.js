@@ -3,11 +3,10 @@ var fs = require('fs'),
 	cjs = require('..'),
 	Promise = require('../lib/promise'),
 	whenReadFile = Promise.wrap(fs.readFile),
-	suitesPath = 'suites/',
-	badLineBreak = /\r\n/g;
+	suitesPath = 'suites/';
 
 function assertEqualContents(content1, content2) {
-	assert.equal(String(content1).replace(badLineBreak, '\n'), String(content2).replace(badLineBreak, '\n'));
+	assert.equal(String(content1), String(content2));
 }
 
 process.chdir(__dirname);
