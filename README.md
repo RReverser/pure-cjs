@@ -26,6 +26,7 @@ Command-line options:
 -V, --version        output the version number
 -i, --input <file>   input file (required)
 -o, --output <file>  output file (defaults to <input>.out.js)
+-x, --extension <ext>  default extension for requires (defaults to "js")
 -m, --map <file>     file to store source map to (optional, defaults to <output>.map)
 -c, --comments       preserve comments in output
 -e, --exports <id>   top module exports destination (optional)
@@ -49,6 +50,7 @@ Name | Type | Description | Default
 ---- | ---- | ----------- | -------
 input | `String` / `Function()` | Input file; example: `'superLib/topModule.js'` | **(required)**
 output | `String` / `Function(input)` | Output file | `input => input.replace(/(\.js)?$/, '.out.js')`
+defaultExt | `String` | Default extension for requires | `"js"`
 map | `String` / `Function(input,output)` / `Boolean` | Source map | if true: `(input, output) => output + '.map'`.
 comments | `Boolean` | Preserve comments in output | `false`
 exports | `String` / `Function(input,output)` | Export top module with [UMD](https://github.com/umdjs/umd) with given global object name | `false`
