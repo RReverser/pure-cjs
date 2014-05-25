@@ -22,14 +22,15 @@ Installation:
 
 Command-line options:
 ```
--h, --help           output usage information
--V, --version        output the version number
--i, --input <file>   input file (required)
--o, --output <file>  output file (defaults to <input>.out.js)
+-h, --help             output usage information
+-V, --version          output the version number
+-i, --input <file>     input file (required)
+-o, --output <file>    output file (defaults to <input>.out.js)
+-m, --map <file>       file to store source map to (optional, defaults to <output>.map)
+-c, --comments         preserve comments in output
+-e, --exports <id>     top module exports destination (optional)
 -x, --extension <ext>  default extension for requires (defaults to "js")
--m, --map <file>     file to store source map to (optional, defaults to <output>.map)
--c, --comments       preserve comments in output
--e, --exports <id>   top module exports destination (optional)
+-d, --module-dir <dir> modules directory name to look in (defaults to "node_modules")
 ```
 
 ## Usage from Node.js
@@ -50,11 +51,12 @@ Name | Type | Description | Default
 ---- | ---- | ----------- | -------
 input | `String` / `Function()` | Input file; example: `'superLib/topModule.js'` | **(required)**
 output | `String` / `Function(input)` | Output file | `input => input.replace(/(\.js)?$/, '.out.js')`
-defaultExt | `String` | Default extension for requires | `"js"`
 map | `String` / `Function(input,output)` / `Boolean` | Source map | if true: `(input, output) => output + '.map'`.
 comments | `Boolean` | Preserve comments in output | `false`
 exports | `String` / `Function(input,output)` | Export top module with [UMD](https://github.com/umdjs/umd) with given global object name | `false`
 transform | `Array` / `Function(input)` | Transformation [through](https://github.com/dominictarr/through)-stream(s) to be used against input files | `[]`
+defaultExt | `String` | Default extension for requires | `"js"`
+moduleDir | `String` | Modules directory name | `"node_modules"`
 dryRun | `Boolean` | Don't write output to disk (and don't append `//# sourceMappingURL=...` to code) | `false`
 
 ### Result object
