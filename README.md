@@ -2,10 +2,6 @@
 
 Pure CommonJS Modules builder.
 
-## Used by
-
-[React.js](https://github.com/facebook/react) ([pull request](https://github.com/facebook/react/pull/1234)).
-
 ## Features
 
 * Minimal destination overhead (almost as small as concatenated file).
@@ -41,7 +37,7 @@ var cjs = require('pure-cjs');
 cjs.transform(options).then(function (result) {
     // handle successful result
 }, function (err) {
-	// handle error
+    // handle error
 });
 ```
 
