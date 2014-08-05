@@ -64,3 +64,7 @@ dryRun | `Boolean` | Don't write output to disk (and don't append `//# sourceMap
 ## Usage from Grunt
 
 Check out [grunt-pure-cjs](https://github.com/RReverser/grunt-pure-cjs) to use builder as [Grunt](https://gruntjs.com/) plugin.
+
+## Usage from Gulp
+
+Check out [gulp-pure-cjs](https://github.com/parroit/gulp-pure-cjs) to use builder as [Gulp](http://gulpjs.com/) plugin.
