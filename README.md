@@ -68,7 +68,7 @@ transform | `Array` / `Function(input)` | Transformation [through](https://githu
 defaultExt | `String` | Default extension for requires | `"js"`
 moduleDir | `String` | Modules directory name | `"node_modules"`
 dryRun | `Boolean` | Don't write output to disk (and don't append `//# sourceMappingURL=...` to code) | `false`
-external | `{ [CommonJS name]: (true / { amd?: String, global?: String }) }` | External dependencies (to be excluded from bundling). Each value can be either `true` (for same name across module systems) or hash with specific names;<br />example: `{jquery: true, lodash: {amd: '../vendor/lodash.js', global: '_'}}` | `{}`
+external | `{ [CommonJS name]: (true / { amd?: String, global?: String }) }` | External dependencies (to be excluded from bundling).<br />Each value can be either `true` (for same name across module systems) or hash with specific names.<br />Example: `{jquery: true, lodash: {amd: '../vendor/lodash.js', global: '_'}}` | `{}`
 
 ### Result object
 
