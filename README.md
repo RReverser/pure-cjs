@@ -27,6 +27,7 @@ Command-line options:
 -e, --exports <id>     top module exports destination (optional)
 -x, --extension <ext>  default extension for requires (defaults to "js")
 -d, --module-dir <dir> modules directory name to look in (defaults to "node_modules")
+-s, --external [hash]  external modules (names or JSON hashes)
 ```
 
 ## Usage from Node.js

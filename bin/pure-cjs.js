@@ -11,6 +11,17 @@ program
 	.option('-m, --map [file]', 'file to store source map to (optional)')
 	.option('-c, --comments', 'preserve comments in output')
 	.option('-e, --exports <id>', 'top module exports destination (optional)')
+	.option('-s, --external [hash]', 'external modules (names or JSON hashes)', function (value, obj) {
+		try {
+			var add = JSON.parse(value);
+			for (var name in add) {
+				obj[name] = add[name];
+			}
+		} catch (e) {
+			obj[value] = true;
+		}
+		return obj;
+	}, {})
 	.parse(process.argv);
 
 if (!program.input) {
