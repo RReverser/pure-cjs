@@ -35,8 +35,8 @@ Command-line options:
 Example:
 ```bash
 pure-cjs \
-    --input index.js \
-    --output bindex.js \
+    --input src/index.js \
+    --output dist/index.js \
     --map \
     --exports SuperLib \
     --external lodash \
