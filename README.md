@@ -57,18 +57,48 @@ cjs.transform(options).then(function (result) {
 
 ### Options object
 
-Name | Type | Description | Default
----- | ---- | ----------- | -------
-input | `String` / `Function()` | Input file; example: `'superLib/topModule.js'` | **(required)**
-output | `String` / `Function(input)` | Output file | `input => input.replace(/(\.js)?$/, '.out.js')`
-map | `String` / `Function(input,output)` / `Boolean` | Source map | if true: `(input, output) => output + '.map'`.
-comments | `Boolean` | Preserve comments in output | `false`
-exports | `String` / `Function(input,output)` | Export top module with [UMD](https://github.com/umdjs/umd) with given global object name | `false`
-transform | `Array` / `Function(input)` | Transformation [through](https://github.com/dominictarr/through)-stream(s) to be used against input files | `[]`
-defaultExt | `String` | Default extension for requires | `"js"`
-moduleDir | `String` | Modules directory name | `"node_modules"`
-dryRun | `Boolean` | Don't write output to disk (and don't append `//# sourceMappingURL=...` to code) | `false`
-external | `{ [CommonJS name]: (true / { amd?: String, global?: String }) }` | External dependencies (to be excluded from bundling).<br />Each value can be either `true` (for same name across module systems) or hash with specific names.<br />Example: `{jquery: true, lodash: {amd: '../vendor/lodash.js', global: '_'}}` | `{}`
+* `input`: `String` | `Function()`. <br />
+  Input file.<br />
+  Example: `'superLib/topModule.js'`
+
+* `output`: `String` | `Function(input)`<br />
+  Output file.<br />
+  Default: `input => input.replace(/(\.js)?$/, '.out.js')`
+
+* `map`: `Boolean` | `String` | `Function(input, output)`<br />
+  Source map.<br />
+  Default: `false` (don't generate source map).
+
+* `comments`: `Boolean`<br />
+  Preserve comments in output.<br />
+  Default: `false`
+
+* `external`: `{ cjsName: (true | { amd?: String, global?: String }) }`<br />
+  External dependencies (to be excluded from bundling). Example:
+  ```javascript
+  {
+    jquery: true,
+    lodash: {amd: '../vendor/lodash.js', global: '_'}
+  }
+  ```
+
+* `exports`: `String` | `Function(input, output)`<br />
+  Export top module with [UMD](https://github.com/umdjs/umd) with given global object name.<br />
+  Default: no exports.
+
+* `transform`: `Array` | `Function(input)`<br />
+  Browserify plugins ([through](https://github.com/dominictarr/through)-stream(s) to be used against input files).
+
+* `moduleDir`: `String`<br />
+  Modules directory name.<br />
+  Default: `"node_modules"`
+
+* `defaultExt`: `String`<br />
+  Default extension for require calls (`"js"`).
+
+* `dryRun`: `Boolean`<br />
+  Don't write output to disk (and don't append `//# sourceMappingURL=...` to code).<br />
+  Default: `false`
 
 ### Result object
 
