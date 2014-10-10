@@ -14,7 +14,9 @@ Pure CommonJS Modules builder.
 ## Console usage
 
 Installation:
-`npm install -g pure-cjs`
+```bash
+npm install -g pure-cjs
+```
 
 Command-line options:
 ```
@@ -28,6 +30,17 @@ Command-line options:
 -x, --extension <ext>  default extension for requires (defaults to "js")
 -d, --module-dir <dir> modules directory name to look in (defaults to "node_modules")
 -s, --external [hash]  external modules (names or JSON hashes)
+```
+
+Example:
+```bash
+pure-cjs \
+    --input index.js \
+    --output bindex.js \
+    --map \
+    --exports SuperLib \
+    --external lodash \
+    --external '{"jquery": {"global": "$", "amd": "../vendor/jquery.js"}}'
 ```
 
 ## Usage from Node.js
