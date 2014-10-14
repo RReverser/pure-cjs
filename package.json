@@ -16,7 +16,7 @@
     "davy": "0.3.0",
     "escodegen": "git+https://github.com/RReverser/escodegen.git",
     "esprima": "^1.2.2",
-    "estemplate": "^0.1.1",
+    "estemplate": "^0.2.0",
     "event-stream": "^3.1.7",
     "resolve": "^1.0.0"
   },
