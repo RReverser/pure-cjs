@@ -1,6 +1,6 @@
 {
   "name": "pure-cjs",
-  "version": "1.12.1",
+  "version": "1.13.0",
   "description": "Pure minimalistic CommonJS builder",
   "bin": "./bin/pure-cjs.js",
   "main": "./lib/index.js",

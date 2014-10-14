@@ -332,5 +332,5 @@
             module.exports = _require(5).value * 7;
         }
     ];
-    _require(5);
+    return _require(5);
 }());
