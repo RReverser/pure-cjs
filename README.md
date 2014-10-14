@@ -43,7 +43,15 @@ pure-cjs \
     --external '{"jquery": {"global": "$", "amd": "../vendor/jquery.js"}}'
 ```
 
-## Usage from Node.js
+## Usage from Grunt
+
+Check out [grunt-pure-cjs](https://github.com/RReverser/grunt-pure-cjs) to use builder as [Grunt](https://gruntjs.com/) plugin.
+
+## Usage from Gulp
+
+Check out [gulp-pure-cjs](https://github.com/parroit/gulp-pure-cjs) to use builder as [Gulp](http://gulpjs.com/) plugin.
+
+## Usage from Node.js code
 
 ```javascript
 var cjs = require('pure-cjs');
@@ -105,11 +113,3 @@ cjs.transform(options).then(function (result) {
 * **code**: `String` &mdash; generated source code.
 * **map**: `Object` &mdash; source map object.
 * **options**: `Object` &mdash; options object with resolved defaults and paths.
-
-## Usage from Grunt
-
-Check out [grunt-pure-cjs](https://github.com/RReverser/grunt-pure-cjs) to use builder as [Grunt](https://gruntjs.com/) plugin.
-
-## Usage from Gulp
-
-Check out [gulp-pure-cjs](https://github.com/parroit/gulp-pure-cjs) to use builder as [Gulp](http://gulpjs.com/) plugin.
