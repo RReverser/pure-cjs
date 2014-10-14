@@ -44,7 +44,7 @@
                 }
                 function Promise(fn) {
                     this.value = undefined;
-                    this.deferreds = [];
+                    this.__deferreds = [];
                     if (arguments.length > 0) {
                         var resolver = new Resolver(this);
                         if (typeof fn == 'function') {
@@ -69,7 +69,7 @@
                     if (this.isFulfilled || this.isRejected) {
                         resolve(deferred, this.isFulfilled ? Promise.SUCCESS : Promise.FAILURE, this.value);
                     } else {
-                        this.deferreds.push(deferred);
+                        this.__deferreds.push(deferred);
                     }
                     return resolver.promise;
                 };
@@ -132,12 +132,12 @@
                     this.complete(error);
                 };
                 Resolver.prototype.complete = function (value) {
-                    var promise = this.promise, deferreds = promise.deferreds, type = promise.isFulfilled ? Promise.SUCCESS : Promise.FAILURE;
+                    var promise = this.promise, deferreds = promise.__deferreds, type = promise.isFulfilled ? Promise.SUCCESS : Promise.FAILURE;
                     promise.value = value;
                     for (var i = 0; i < deferreds.length; ++i) {
                         resolve(deferreds[i], type, value);
                     }
-                    promise.deferreds = undefined;
+                    promise.__deferreds = undefined;
                 };
                 function resolve(deferred, type, value) {
                     var fn = deferred[type], resolver = deferred.resolver;
@@ -187,9 +187,9 @@
                     return new Promise(val);
                 };
                 Promise.reject = function (err) {
-                    var resolver = new Resolver();
+                    var resolver = Promise.defer();
                     resolver.reject(err);
-                    return resolve.promise;
+                    return resolver.promise;
                 };
                 Promise.defer = function () {
                     return new Resolver(new Promise());
@@ -256,8 +256,16 @@
                 function isFunction(fn) {
                     return fn && typeof fn === 'function';
                 }
-                function parse(args) {
-                    return args.length === 1 && Array.isArray(args[0]) ? args[0] : [].slice.call(args);
+                function parse(obj) {
+                    if (obj.length === 1 && Array.isArray(obj[0])) {
+                        return obj[0];
+                    } else {
+                        var args = new Array(obj.length);
+                        for (var i = 0; i < args.length; ++i) {
+                            args[i] = obj[i];
+                        }
+                        return args;
+                    }
                 }
             }(this));
         },
