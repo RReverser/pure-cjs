@@ -329,9 +329,12 @@
             }(this));
         },
         function (module, exports) {
-            var c = _require(5), url = require('url'), Promise = _require(1);
-            this.topValue = _require(7) * 2;
-            this.expectedValue = _require(6).answer;
+            var c = _require(6), url = require('url'), Promise = _require(1);
+            this.topValue = _require(5) * 2;
+            this.expectedValue = _require(7).answer;
+        },
+        function (module, exports) {
+            module.exports = _require(6).value * 7;
         },
         function (module, exports) {
             var a = _require(4);
@@ -339,10 +342,7 @@
         },
         function (module, exports) {
             module.exports = { 'answer': 42 };
-        },
-        function (module, exports) {
-            module.exports = _require(5).value * 7;
         }
     ];
-    return _require(5);
+    return _require(6);
 }());

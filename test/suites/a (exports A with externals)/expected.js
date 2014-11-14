@@ -31,9 +31,13 @@
         },
         function (module, exports) {
             // License of a
-            var c = _require(2), url = require('url'), Promise = _require(0);
-            this.topValue = _require(4) * 2;
-            this.expectedValue = _require(3).answer;
+            var c = _require(3), url = require('url'), Promise = _require(0);
+            this.topValue = _require(2) * 2;
+            this.expectedValue = _require(4).answer;
+        },
+        function (module, exports) {
+            // License of b
+            module.exports = _require(3).value * 7;
         },
         function (module, exports) {
             // License of c
@@ -42,10 +46,6 @@
         },
         function (module, exports) {
             module.exports = { 'answer': 42 };
-        },
-        function (module, exports) {
-            // License of b
-            module.exports = _require(2).value * 7;
         }
     ];
     return _require(1);
