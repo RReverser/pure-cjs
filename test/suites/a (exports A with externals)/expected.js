@@ -32,12 +32,16 @@
         function (module, exports) {
             // License of a
             var c = _require(2), url = require('url'), Promise = _require(0);
-            this.topValue = _require(3) * 2;
+            this.topValue = _require(4) * 2;
+            this.expectedValue = _require(3).answer;
         },
         function (module, exports) {
             // License of c
             var a = _require(1);
             exports.value = 3;
+        },
+        function (module, exports) {
+            module.exports = { 'answer': 42 };
         },
         function (module, exports) {
             // License of b
