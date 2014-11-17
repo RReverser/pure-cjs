@@ -1,17 +1,17 @@
 (function (name, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define([], factory);
+        define([undefined], factory);
     } else if (typeof exports === 'object') {
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory();
+        module.exports = factory(require('url'));
     } else {
         // Browser globals (root is window)
-        this[name] = factory();
+        this[name] = factory(undefined);
     }
-}('A', function (define) {
+}('A', function (__external_url, define) {
     function _require(index) {
         var module = _require.cache[index];
         if (!module) {
@@ -343,7 +343,7 @@
         },
         function (module, exports) {
             // License of a
-            var c = _require(6), url = require('url'), Promise = _require(1);
+            var c = _require(6), url = _require(8), Promise = _require(1);
             this.topValue = _require(5) * 2;
             this.expectedValue = _require(7).answer;
         },
@@ -358,6 +358,9 @@
         },
         function (module, exports) {
             module.exports = { 'answer': 42 };
+        },
+        function (module, exports) {
+            return __external_url;
         }
     ];
     return _require(4);

@@ -1,5 +1,11 @@
 module.exports = {
 	input: 'fixtures/a.js',
 	exports: 'A',
-	map: true
+	map: true,
+	external: {
+		url: {
+			amd: false,
+			global: false
+		}
+	}
 };

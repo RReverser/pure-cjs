@@ -1,4 +1,4 @@
-(function (define) {
+(function (__external_url, define) {
     function _require(index) {
         var module = _require.cache[index];
         if (!module) {
@@ -329,7 +329,7 @@
             }(this));
         },
         function (module, exports) {
-            var c = _require(6), url = require('url'), Promise = _require(1);
+            var c = _require(6), url = _require(8), Promise = _require(1);
             this.topValue = _require(5) * 2;
             this.expectedValue = _require(7).answer;
         },
@@ -342,6 +342,9 @@
         },
         function (module, exports) {
             module.exports = { 'answer': 42 };
+        },
+        function (module, exports) {
+            return __external_url;
         }
     ];
     return _require(6);

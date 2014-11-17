@@ -1,6 +1,6 @@
 {
   "name": "pure-cjs",
-  "version": "1.17.0",
+  "version": "1.18.0",
   "description": "Pure minimalistic CommonJS builder",
   "bin": "./bin/pure-cjs.js",
   "main": "./lib/index.js",
@@ -16,7 +16,7 @@
     "davy": "0.3.3",
     "escodegen": "git+https://github.com/RReverser/escodegen.git",
     "esprima": "^1.2.2",
-    "estemplate": "^0.3.0",
+    "estemplate": "^0.4.0",
     "event-stream": "^3.1.7",
     "resolve": "^1.0.0"
   },

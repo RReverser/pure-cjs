@@ -1,3 +1,9 @@
 module.exports = {
-	input: 'fixtures/c.js'
+	input: 'fixtures/c.js',
+	external: {
+		url: {
+			amd: false,
+			global: false
+		}
+	}
 };

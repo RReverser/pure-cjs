@@ -4,6 +4,10 @@ module.exports = {
 	map: true,
 	comments: true,
 	external: {
-		davy: true
+		davy: true,
+		url: {
+			amd: false,
+			global: false
+		}
 	}
 };
