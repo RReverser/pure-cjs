@@ -1,13 +1,14 @@
-(function (__external_url, define) {
-    function _require(index) {
-        var module = _require.cache[index];
+(function (__external_url) {
+    var global = this, define;
+    function _require(id) {
+        var module = _require.cache[id];
         if (!module) {
             var exports = {};
-            module = _require.cache[index] = {
-                id: index,
+            module = _require.cache[id] = {
+                id: id,
                 exports: exports
             };
-            _require.modules[index].call(exports, module, exports);
+            _require.modules[id].call(exports, module, exports);
         }
         return module.exports;
     }
@@ -344,7 +345,7 @@
             module.exports = { 'answer': 42 };
         },
         function (module, exports) {
-            return __external_url;
+            module.exports = __external_url;
         }
     ];
     return _require(6);

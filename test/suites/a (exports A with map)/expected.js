@@ -1,21 +1,22 @@
-(function (name, factory) {
+(function (factory) {
     if (typeof define === 'function' && define.amd) {
-        define([undefined], factory);
+        define([''], factory);
     } else if (typeof exports === 'object') {
         module.exports = factory(require('url'));
     } else {
-        this[name] = factory(undefined);
+        this.A = factory(undefined);
     }
-}('A', function (__external_url, define) {
-    function _require(index) {
-        var module = _require.cache[index];
+}(function (__external_url) {
+    var global = this, define;
+    function _require(id) {
+        var module = _require.cache[id];
         if (!module) {
             var exports = {};
-            module = _require.cache[index] = {
-                id: index,
+            module = _require.cache[id] = {
+                id: id,
                 exports: exports
             };
-            _require.modules[index].call(exports, module, exports);
+            _require.modules[id].call(exports, module, exports);
         }
         return module.exports;
     }
@@ -352,7 +353,7 @@
             module.exports = { 'answer': 42 };
         },
         function (module, exports) {
-            return __external_url;
+            module.exports = __external_url;
         }
     ];
     return _require(4);
