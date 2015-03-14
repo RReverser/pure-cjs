@@ -4,7 +4,7 @@
     } else if (typeof exports === 'object') {
         module.exports = factory(require('url'));
     } else {
-        this.A = factory(undefined);
+        this['A'] = factory(undefined);
     }
 }(function (__external_url) {
     var global = this, define;
