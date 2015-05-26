@@ -9,7 +9,7 @@
         module.exports = factory(require('url'));
     } else {
         // Browser globals
-        this.A = factory(undefined);
+        this['A'] = factory(undefined);
     }
 }(function (__external_url) {
     var global = this, define;

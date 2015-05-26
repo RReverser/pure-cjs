@@ -12,7 +12,7 @@
         module.exports = factory(require('davy'), require('url'));
     } else {
         // Browser globals
-        this.A = factory(davy, undefined);
+        this['A'] = factory(davy, undefined);
     }
 }(function (__external_davy, __external_url) {
     var global = this, define;
